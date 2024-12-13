@@ -1,34 +1,58 @@
 <div class="grid">
-
-
     <div class="col-12">
-        <div class="card">
-            <h5>Advanced</h5>
-            <div class="p-fluid p-formgrid grid">
-                <div class="field col-12 md:col-6">
-                    <label htmlFor="firstname2">Subject Name</label>
-                    <input pInputText id="firstname2" type="text" />
-                </div>
-                <div class="field col-12 md:col-6">
-                    <label htmlFor="courseName">Course Name</label>
-                    <p-dropdown [options]="courses" [(ngModel)]="selectedCourse" placeholder="Select a course"
-                        optionLabel="name">
-                    </p-dropdown>
-                </div>
-                <div class="field col-12 md:col-6">
-                    <label htmlFor="year">Year</label>
-                    <p-dropdown [options]="years" placeholder="Select a year" optionLabel="name" class="mt-3">
-                    </p-dropdown>
-                </div>
-                <div class="field col-12 md:col-6">
-                    <label htmlFor="driveLink">Google Drive Link</label>
-                    <input pInputText id="driveLink" type="text" />
-                </div>
-                <div class="field col-12 ">
-                    <label htmlFor="driveLink">Keywords</label>
-                    <p-chips ></p-chips>
-                </div>
-            </div>
-        </div>
+      <div class="card">
+        <h5>Advanced</h5>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-fluid p-formgrid grid">
+          <!-- Subject Name -->
+          <div class="field col-12 md:col-6">
+            <label for="subjectName">Subject Name</label>
+            <input pInputText id="subjectName" formControlName="subjectName" type="text" />
+            <small *ngIf="getErrorMessage('subjectName')" class="p-error">
+              {{ getErrorMessage('subjectName') }}
+            </small>
+          </div>
+  
+          <!-- Course Name -->
+          <div class="field col-12 md:col-6">
+            <label for="courseName">Course Name</label>
+            <p-dropdown [options]="courses" formControlName="courseName" placeholder="Select a course" optionLabel="name">
+            </p-dropdown>
+            <small *ngIf="getErrorMessage('courseName')" class="p-error">
+              {{ getErrorMessage('courseName') }}
+            </small>
+          </div>
+  
+          <!-- Year -->
+          <div class="field col-12 md:col-6">
+            <label for="year">Year</label>
+            <p-dropdown [options]="years" formControlName="year" placeholder="Select a year" optionLabel="name">
+            </p-dropdown>
+            <small *ngIf="getErrorMessage('year')" class="p-error">
+              {{ getErrorMessage('year') }}
+            </small>
+          </div>
+  
+          <!-- Google Drive Link -->
+          <div class="field col-12 md:col-6">
+            <label for="driveLink">Google Drive Link</label>
+            <input pInputText id="driveLink" formControlName="driveLink" type="text" />
+            <small *ngIf="getErrorMessage('driveLink')" class="p-error">
+              {{ getErrorMessage('driveLink') }}
+            </small>
+          </div>
+  
+          <!-- Keywords -->
+          <div class="field col-12">
+            <label for="keywords">Keywords</label>
+            <p-chips formControlName="keywords"></p-chips>
+          </div>
+  
+          <!-- Submit Button -->
+          <div class="field col-12">
+            <button pButton type="submit" label="Submit" [disabled]="form.invalid"></button>
+          </div>
+        </form>
+      </div>
     </div>
-</div>
+  </div>
+  
